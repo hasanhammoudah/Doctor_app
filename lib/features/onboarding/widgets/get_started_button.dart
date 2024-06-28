@@ -1,5 +1,6 @@
 import 'package:doctor/core/theming/colors.dart';
 import 'package:doctor/core/theming/styles.dart';
+import 'package:doctor/features/login/ui/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class GetStartedButton extends StatelessWidget {
@@ -8,7 +9,14 @@ class GetStartedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const LoginScreen(),
+          ),
+        );
+      },
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(
             ColorsManager.mainBlue,
