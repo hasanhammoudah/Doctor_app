@@ -1,3 +1,5 @@
+import 'package:doctor/core/helpers/extenstions.dart';
+import 'package:doctor/core/routing/routes.dart';
 import 'package:doctor/core/theming/colors.dart';
 import 'package:doctor/core/theming/styles.dart';
 import 'package:doctor/features/login/ui/login_screen.dart';
@@ -10,12 +12,7 @@ class GetStartedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const LoginScreen(),
-          ),
-        );
+         context.pushNamed(Routes.loginScreen);
       },
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(
@@ -32,7 +29,7 @@ class GetStartedButton extends StatelessWidget {
           )),
       child: Text(
         'Get Started',
-        style: TextStyles.font16WhiteSemiBold,
+        style: TextStyles.font16WhiteMedium,
       ),
     );
   }
