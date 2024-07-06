@@ -16,7 +16,7 @@ class TermsAndConditionsText extends StatelessWidget {
           ),
           TextSpan(
             text: ' Terms & Conditions',
-            //  style: TextStyles.font13DarkBlueMedium,
+             style: TextStyles.font13DarkBlueMedium,
           ),
           TextSpan(
             text: ' and',
@@ -24,7 +24,7 @@ class TermsAndConditionsText extends StatelessWidget {
           ),
           TextSpan(
             text: ' Privacy Policy',
-            //  style: TextStyles.font13DarkBlueMedium,
+              style: TextStyles.font13DarkBlueMedium,
           ),
         ],
       ),
