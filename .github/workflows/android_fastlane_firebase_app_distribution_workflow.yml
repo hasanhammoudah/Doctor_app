@@ -7,7 +7,7 @@ on:
 
 jobs:
   distribute_to_firebase:
-    runs-on: windows-latest  # Specify Windows environment
+    runs-on: windows-latest  # Adjust to your preferred OS environment
 
     steps:
     - name: Checkout my repo code
@@ -29,16 +29,19 @@ jobs:
       with:
         ruby-version: "3.2.3"
         bundler-cache: true
-        working-directory: C:/Users/owner/doctor/android/Doctor_app  # Adjust to the correct path where your Gemfile resides
+        working-directory: C:/Users/owner/doctor/android/Doctor_app  # Adjust to your project's actual path
       env:
-        GEM_HOME: ${{ runner.temp }}/bundle
+        JAVA_HOME: C:\hostedtoolcache\windows\Java_Temurin-Hotspot_jdk\11.0.23-9\x64
+        FLUTTER_ROOT: C:\hostedtoolcache\windows\flutter\stable-3.22.2-x64
+        PUB_CACHE: C:\Users\runneradmin\AppData\Local\Pub\Cache
+        GEM_HOME: D:\a\_temp/bundle
         BUNDLE_PATH: vendor/bundle
         BUNDLE_JOBS: 4
         BUNDLE_RETRY: 3
 
     - name: Debug Current Directory
       run: |
-        dir C:/Users/owner/doctor/android/Doctor_app  # List files in the Doctor_app directory for debugging
+        dir C:/Users/owner/doctor/android/Doctor_app  # List files in Doctor_app directory for debugging
 
     - name: Add x86_64-linux platform to Gemfile.lock
       run: |
