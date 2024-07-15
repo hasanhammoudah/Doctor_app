@@ -29,7 +29,7 @@ jobs:
       with:
         ruby-version: "3.2.3"
         bundler-cache: true
-        working-directory: C:/Users/owner/doctor/android/
+        working-directory: C:/Users/owner/doctor/android/Doctor_app  # Adjust this path to your project's root
       env:
         GEM_HOME: ${{ runner.temp }}/bundle
         BUNDLE_PATH: vendor/bundle
@@ -38,8 +38,7 @@ jobs:
 
     - name: Debug Current Directory
       run: |
-        Set-Location C:/Users/owner/doctor/android/
-        Get-ChildItem -Force
+        dir C:/Users/owner/doctor/android/Doctor_app  # List files in the project directory
 
     - name: Add x86_64-linux platform to Gemfile.lock
       run: |
