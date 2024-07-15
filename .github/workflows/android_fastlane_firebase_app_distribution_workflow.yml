@@ -7,7 +7,7 @@ on:
 
 jobs:
   distribute_to_firebase:
-    runs-on: windows-latest # Specify Windows environment
+    runs-on: windows-latest  # Specify Windows environment
 
     steps:
     - name: Checkout my repo code
@@ -29,7 +29,7 @@ jobs:
       with:
         ruby-version: "3.2.3"
         bundler-cache: true
-        working-directory: C:/Users/owner/doctor/android/Doctor_app  # Adjust this path to your project's root
+        working-directory: C:/Users/owner/doctor/android  # Adjust to the correct path without Doctor_app
       env:
         GEM_HOME: ${{ runner.temp }}/bundle
         BUNDLE_PATH: vendor/bundle
@@ -38,7 +38,7 @@ jobs:
 
     - name: Debug Current Directory
       run: |
-        dir C:/Users/owner/doctor/android/Doctor_app  # List files in the project directory
+        dir C:/Users/owner/doctor/android  # List files in the android directory
 
     - name: Add x86_64-linux platform to Gemfile.lock
       run: |
