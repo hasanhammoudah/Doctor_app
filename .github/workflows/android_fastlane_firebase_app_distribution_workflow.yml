@@ -7,7 +7,8 @@ on:
 
 jobs:
   distribute_to_firebase:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest  # Specify Windows environment
+
     steps:
     - name: Checkout my repo code
       uses: actions/checkout@v2
@@ -28,18 +29,17 @@ jobs:
       with:
         ruby-version: "3.2.3"
         bundler-cache: true
-        working-directory: ${{ github.workspace }}/android
+        working-directory: C:/Users/owner/doctor/android/
       env:
         GEM_HOME: ${{ runner.temp }}/bundle
         BUNDLE_PATH: vendor/bundle
         BUNDLE_JOBS: 4
         BUNDLE_RETRY: 3
 
-    - name: Check Directory Contents
-      run: ls -la ${{ github.workspace }}/android
-
-    - name: Navigate to Project Directory
-      run: cd ${{ github.workspace }}/android
+    - name: Debug Current Directory
+      run: |
+        Set-Location C:/Users/owner/doctor/android/
+        Get-ChildItem -Force
 
     - name: Add x86_64-linux platform to Gemfile.lock
       run: |
