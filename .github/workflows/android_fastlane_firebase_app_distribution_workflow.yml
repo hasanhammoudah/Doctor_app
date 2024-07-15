@@ -23,16 +23,32 @@ jobs:
       with:
         channel: stable
 
-    - name: Setup Ruby
+    - name: Setup Ruby and Bundler
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: "3.2.3"
         bundler-cache: true
-        working-directory: android
-        
+        working-directory: ${{ github.workspace }}/android
+      env:
+        GEM_HOME: ${{ runner.temp }}/bundle
+        BUNDLE_PATH: vendor/bundle
+        BUNDLE_JOBS: 4
+        BUNDLE_RETRY: 3
+
+    - name: Check Gemfile Existence
+      run: ls -la ${{ github.workspace }}/android/Gemfile
+
+    - name: Add x86_64-linux platform to Gemfile.lock
+      run: |
+        bundle lock --add-platform x86_64-linux
+
+    - name: Install dependencies
+      run: |
+        bundle install
+
     - name: Build and Distribute App
       env:
         FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
       run: |
         bundle exec fastlane android firebase_distribution
-      working-directory: android
+      working-directory: ${{ github.workspace }}/android
