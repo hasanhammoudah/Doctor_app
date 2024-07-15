@@ -7,7 +7,7 @@ on:
 
 jobs:
   distribute_to_firebase:
-    runs-on: windows-latest  # Specify Windows environment
+    runs-on: windows-latest # Specify Windows environment
 
     steps:
     - name: Checkout my repo code
