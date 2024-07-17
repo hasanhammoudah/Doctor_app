@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:doctor/core/helpers/constants.dart';
+import 'package:doctor/core/helpers/shared_pref_helper.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 
@@ -28,15 +30,15 @@ class DioFactory {
     dio?.options.headers = {
       'Accept': 'application/json',
       'Authorization':
-          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3ZjYXJlLmludGVncmF0aW9uMjUuY29tL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNzIxMTk1NjQwLCJleHAiOjE3MjEyODIwNDAsIm5iZiI6MTcyMTE5NTY0MCwianRpIjoiWEcySWw4OFF2aXdUUGZndSIsInN1YiI6IjE1MDciLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.xwZoytGEDFLmjKlf94lxTrEGandjsN2p3t5j-bxdlAg',
+          'Bearer ${await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken)}',
     };
   }
 
-  // static void setTokenIntoHeaderAfterLogin(String token) {
-  //   dio?.options.headers = {
-  //     'Authorization': 'Bearer $token',
-  //   };
-  // }
+  static void setTokenIntoHeaderAfterLogin(String token) {
+    dio?.options.headers = {
+      'Authorization': 'Bearer $token',
+    };
+  }
 
   static void addDioInterceptor() {
     dio?.interceptors.add(
