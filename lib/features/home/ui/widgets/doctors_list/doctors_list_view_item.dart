@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor/core/helpers/spacing.dart';
 import 'package:doctor/core/theming/styles.dart';
 import 'package:doctor/features/home/data/models/specializations_response_model.dart';
@@ -14,11 +13,6 @@ class DoctorsListViewItem extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(
         bottom: 16.h,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(
-          16.0,
-        ),
       ),
       child: Row(
         children: [
@@ -38,7 +32,7 @@ class DoctorsListViewItem extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          horizontalSpace(16),
+          horizontalSpace(30),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
