@@ -30,18 +30,20 @@ jobs:
         bundler-cache: true
         working-directory: android
     
-    - name: Clean Flutter and Gradle caches
-      run: |
-        flutter clean
-        cd android
-        ./gradlew clean
-    
+    - name: Clean Flutter Build
+      run: flutter clean
+
+    - name: Clean Gradle Build
+      run: ./gradlew clean
+      working-directory: android
+      continue-on-error: true  # Optional: Continue even if this fails
+
     - name: Install Dependencies
       run: |
         flutter pub get
         bundle install
       working-directory: android
-    
+
     - name: Build APK
       run: flutter build apk --release --verbose
       working-directory: android
