@@ -32,25 +32,33 @@ jobs:
     
     - name: Clean Flutter Build
       run: flutter clean
-
-    - name: Clean Gradle Build
-      run: ./gradlew clean
-      working-directory: android
-      continue-on-error: true  # Optional: Continue even if this fails
-
+    
     - name: Install Dependencies
       run: |
         flutter pub get
         bundle install
-      working-directory: android
-
-    - name: Build APK
-      run: flutter build apk --release --verbose
-      working-directory: android
+      working-directory: ./  # Ensure this is the root of the project
     
-    - name: Build and Distribute App
+    - name: Build APK for Development
+      run: flutter build apk --flavor development --release --verbose
+      working-directory: ./  # Ensure this is the root of the project
+    
+    - name: Build APK for Release
+      run: flutter build apk --flavor production --release --verbose
+      working-directory: ./  # Ensure this is the root of the project
+    
+    - name: Distribute Development APK
       env:
         FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
       run: |
         cd android
-        bundle exec fastlane android firebase_distribution --verbose
+        bundle exec fastlane android firebase_distribution --verbose --lane development
+      working-directory: ./android
+    
+    - name: Distribute Release APK
+      env:
+        FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
+      run: |
+        cd android
+        bundle exec fastlane android firebase_distribution --verbose --lane release
+      working-directory: ./android
