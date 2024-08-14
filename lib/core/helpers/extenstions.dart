@@ -22,6 +22,11 @@ extension Navigation on BuildContext {
 extension StringExtension on String? {
   bool isNullOrEmpty() => this == null || this == "";
 }
+
 extension ListExtention<T> on List<T>? {
+  bool isNullOrEmpty() => this == null || this!.isEmpty;
+}
+
+extension MapExtenstion<k, v> on Map<k, v>? {
   bool isNullOrEmpty() => this == null || this!.isEmpty;
 }
