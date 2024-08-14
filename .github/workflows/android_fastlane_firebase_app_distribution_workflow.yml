@@ -29,20 +29,26 @@ jobs:
         ruby-version: "3.3.4"
         bundler-cache: true
         working-directory: android
-
+    
     - name: Clean Flutter and Gradle caches
       run: |
         flutter clean
+        cd android
         ./gradlew clean
+    
+    - name: Install Dependencies
+      run: |
+        flutter pub get
+        bundle install
       working-directory: android
-
+    
     - name: Build APK
       run: flutter build apk --release --verbose
       working-directory: android
-
+    
     - name: Build and Distribute App
       env:
         FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
       run: |
+        cd android
         bundle exec fastlane android firebase_distribution --verbose
-      working-directory: android
