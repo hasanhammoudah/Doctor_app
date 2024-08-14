@@ -17,7 +17,7 @@ void main() async {
     appRouter: AppRouter(),
   ));
 }
-
+//s
 checkIfLoggedInUser() async {
   String? userToken =
       await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
