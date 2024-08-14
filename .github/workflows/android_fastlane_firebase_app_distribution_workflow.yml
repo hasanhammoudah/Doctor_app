@@ -7,8 +7,7 @@ on:
 
 jobs:
   distribute_to_firebase:
-    runs-on: windows-latest  # Adjust to your preferred OS environment
-
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout my repo code
       uses: actions/checkout@v2
@@ -24,36 +23,17 @@ jobs:
       with:
         channel: stable
 
-    - name: Setup Ruby and Bundler
+    - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: "3.2.3"
+        ruby-version: "3.3.4"
         bundler-cache: true
-        working-directory: C:/Users/owner/doctor/android/Doctor_app  # Ensure this path is correct
-      env:
-        JAVA_HOME: C:\hostedtoolcache\windows\Java_Temurin-Hotspot_jdk\11.0.23-9\x64
-        FLUTTER_ROOT: C:\hostedtoolcache\windows\flutter\stable-3.22.2-x64
-        PUB_CACHE: C:\Users\runneradmin\AppData\Local\Pub\Cache
-        GEM_HOME: D:\a\_temp/bundle
-        BUNDLE_PATH: vendor/bundle
-        BUNDLE_JOBS: 4
-        BUNDLE_RETRY: 3
-
-    - name: Debug Current Directory
-      run: |
-        dir C:/Users/owner/doctor/android/Doctor_app  # List files in Doctor_app directory for debugging
-
-    - name: Add x86_64-linux platform to Gemfile.lock
-      run: |
-        bundle lock --add-platform x86_64-linux
-
-    - name: Install dependencies
-      run: |
-        bundle install
-
+        working-directory: android
+        
     - name: Build and Distribute App
       env:
         FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
       run: |
         bundle exec fastlane android firebase_distribution
-      working-directory: C:/Users/owner/doctor/android/Doctor_app
+      working-directory: android
+
