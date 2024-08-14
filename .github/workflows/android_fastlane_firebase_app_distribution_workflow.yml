@@ -15,7 +15,7 @@ jobs:
     - name: Set up JDK 11
       uses: actions/setup-java@v2
       with:
-        java-version: '11'
+        java-version: '18'
         distribution: 'temurin'
     
     - name: Install Flutter
@@ -29,31 +29,11 @@ jobs:
         ruby-version: "3.3.4"
         bundler-cache: true
         working-directory: android
-    
-    - name: Install Dependencies
+        
+    - name: Build and Distribute App
+      env:
+        FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
       run: |
-        flutter pub get
-        bundle install
+        bundle exec fastlane android firebase_distribution
       working-directory: android
 
-    - name: Build APK for Development
-      run: flutter build apk --flavor development --release --verbose
-      working-directory: ./  # Ensure this is the root of the project
-    
-    - name: Build APK for Release
-      run: flutter build apk --flavor production --release --verbose
-      working-directory: ./  # Ensure this is the root of the project
-    
-    - name: Distribute Development APK
-      env:
-        FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
-      run: |
-        cd android
-        bundle exec fastlane android firebase_distribution --verbose --lane development
-    
-    - name: Distribute Release APK
-      env:
-        FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
-      run: |
-        cd android
-        bundle exec fastlane android firebase_distribution --verbose --lane release
