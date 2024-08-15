@@ -1,4 +1,6 @@
 import 'package:doctor/core/helpers/extenstions.dart';
+import 'package:doctor/core/networking/api_error_handler.dart';
+import 'package:doctor/core/networking/api_error_model.dart';
 import 'package:doctor/features/login/logic/cubit/login_cubit.dart';
 import 'package:doctor/features/login/logic/cubit/login_state.dart';
 import 'package:flutter/material.dart';
@@ -31,8 +33,8 @@ class LoginBlocListener extends StatelessWidget {
             context.pop();
             context.pushNamed(Routes.homeScreen);
           },
-          error: (error) {
-            setupErrorState(context, error);
+          error: (apiErrorModel) {
+            setupErrorState(context, apiErrorModel);
           },
         );
       },
@@ -40,7 +42,7 @@ class LoginBlocListener extends StatelessWidget {
     );
   }
 
-  void setupErrorState(BuildContext context, String error) {
+  void setupErrorState(BuildContext context, ApiErrorModel apiErrorModel) {
     context.pop();
     showDialog(
       context: context,
@@ -51,7 +53,7 @@ class LoginBlocListener extends StatelessWidget {
           size: 32,
         ),
         content: Text(
-          error,
+          apiErrorModel.getAllErrorMessages(),
           style: TextStyles.font15DarkBlueMedium,
         ),
         actions: [

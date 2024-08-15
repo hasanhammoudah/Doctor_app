@@ -4,7 +4,6 @@ import 'package:doctor/features/signup/logic/cubit/sign_up_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class SignupCubit extends Cubit<SignupState> {
   final SignupRepo _signupRepo;
   SignupCubit(this._signupRepo) : super(const SignupState.initial());
@@ -31,8 +30,8 @@ class SignupCubit extends Cubit<SignupState> {
     );
     response.when(success: (signupResponse) {
       emit(SignupState.signupSuccess(signupResponse));
-    }, failure: (error) {
-      emit(SignupState.signupError(error: error.apiErrorModel.message ?? ''));
+    }, failure: (apiErrorModel) {
+      emit(SignupState.signupError(apiErrorModel));
     });
   }
 }
