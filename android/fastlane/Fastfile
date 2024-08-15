@@ -8,7 +8,7 @@ platform :android do
     firebase_app_distribution(
       app: "1:864490406299:android:2e6abc7e9953a3f383e13e",
       firebase_cli_token:ENV["FIREBASE_CLI_TOKEN"],
-      android_artifact_path:"../build/app/outputs/flutter-apk/app-production-release.apk ",
+      android_artifact_path:"../build/app/outputs/flutter-apk/app-production-release.apk",
       android_artifact_type:"APK",
       testers: "hasanhammoudah@gmail.com",
       release_notes:"First Fastlane Firebase Distribution!"
