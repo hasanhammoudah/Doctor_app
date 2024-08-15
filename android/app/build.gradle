@@ -63,7 +63,7 @@ android {
       
         development {
           dimension "default"
-          applicationIdSuffix ".dev"
+          //applicationIdSuffix ".dev"
           resValue "string", "app_name", "DocDoc Development"
       }
   }
@@ -81,4 +81,16 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version") {
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib'
+    }
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version") {
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib'
+    }
+
+
+
+    
+}
+
